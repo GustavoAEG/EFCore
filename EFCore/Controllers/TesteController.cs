@@ -80,11 +80,32 @@ namespace EFCore.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(aluno);
-        }
+         }
             private bool AlunoExists(int id)
             {
                 return _context.Alunos.Any(e => e.Id == id);
             }
+
+        //GET
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id); //pegar aluno cujo ID seja igual ID q estou passando
+
+            if (aluno == null)
+            {
+
+                return NotFound();
+
+            }
+
+            return View(aluno); //caso seja encontrado, sera renderizado pra view aluno
         }
+
+        }
+   
     }
 
