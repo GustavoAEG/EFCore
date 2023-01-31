@@ -104,8 +104,18 @@ namespace EFCore.Controllers
 
             return View(aluno); //caso seja encontrado, sera renderizado pra view aluno
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirma(int? id)
+        {
+            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id);
+            _context.Alunos.Remove(aluno);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
+
+
+    }
    
     }
 
