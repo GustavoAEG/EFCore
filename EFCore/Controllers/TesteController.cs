@@ -18,7 +18,7 @@ namespace EFCore.Controllers
         public IActionResult Index()
         {
             //var alunos = _context.Alunos.ToList();
-           var alunos = _context.Alunos.OrderBy(a => a.Nome);
+            var alunos = _context.Alunos.OrderBy(a => a.Nome);
 
             return View(alunos);
         }
@@ -30,7 +30,7 @@ namespace EFCore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Nome,Sexo,Email,Nascimento")]Aluno aluno)
+        public IActionResult Create([Bind("Id,Nome,Sexo,Email,Nascimento")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {
@@ -80,11 +80,11 @@ namespace EFCore.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(aluno);
-         }
-            private bool AlunoExists(int id)
-            {
-                return _context.Alunos.Any(e => e.Id == id);
-            }
+        }
+        private bool AlunoExists(int id)
+        {
+            return _context.Alunos.Any(e => e.Id == id);
+        }
 
         //GET
         public IActionResult Delete(int? id)
@@ -114,8 +114,22 @@ namespace EFCore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id);
+
+            if (aluno == null)
+            {
+                return NotFound();
+            }
+            return View(aluno);
+        }
     }
-   
-    }
+}
+
 
