@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using EFCore.Context;
 using MVC_EF.Models;
+using System.Data;
 
 namespace EFCore.Controllers
 {
@@ -49,9 +50,41 @@ namespace EFCore.Controllers
             var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id);
             if (aluno == null)
             {
-
+                return NotFound();
             }
+            return View(aluno);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("Id, Nome, Sexo, Email, Nascimento")] Aluno aluno)
+        {
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(aluno);
+                    _context.SaveChanges();
+                }
+                catch (DBConcurrencyException)
+                {
+                    if (!AlunoExists(aluno.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(aluno);
+        }
+            private bool AlunoExists(int id)
+            {
+                return _context.Alunos.Any(e => e.Id == id);
+            }
         }
     }
-}
+
