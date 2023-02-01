@@ -4,6 +4,7 @@ using MVC_EF.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230201015658_sqlA")]
+    partial class sqlA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,23 +61,18 @@ namespace EFCore.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("TipoSociosTipoSocioId")
-                        .HasColumnType("int");
-
                     b.HasKey("IdAluno");
-
-                    b.HasIndex("TipoSociosTipoSocioId");
 
                     b.ToTable("Alunos");
                 });
 
             modelBuilder.Entity("EFCore.Models.TipoSocios", b =>
                 {
-                    b.Property<int>("TipoSocioId")
+                    b.Property<int?>("IdAluno")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoSocioId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("IdAluno"));
 
                     b.Property<int>("DuracaoMeses")
                         .HasColumnType("int");
@@ -82,20 +80,9 @@ namespace EFCore.Migrations
                     b.Property<int>("TaxaDesconto")
                         .HasColumnType("int");
 
-                    b.HasKey("TipoSocioId");
+                    b.HasKey("IdAluno");
 
                     b.ToTable("TipoSocioL");
-                });
-
-            modelBuilder.Entity("EFCore.Models.Aluno", b =>
-                {
-                    b.HasOne("EFCore.Models.TipoSocios", "TipoSocios")
-                        .WithMany()
-                        .HasForeignKey("TipoSociosTipoSocioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TipoSocios");
                 });
 #pragma warning restore 612, 618
         }

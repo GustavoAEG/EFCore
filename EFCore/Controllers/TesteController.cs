@@ -47,7 +47,7 @@ namespace EFCore.Controllers
             {
                 return NotFound();
             }
-            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id);
+            var aluno = _context.Alunos.SingleOrDefault(a => a.IdAluno == id);
             if (aluno == null)
             {
                 return NotFound();
@@ -68,7 +68,7 @@ namespace EFCore.Controllers
                 }
                 catch (DBConcurrencyException)
                 {
-                    if (!AlunoExists(aluno.Id))
+                    if (!AlunoExists(aluno.IdAluno))
                     {
                         return NotFound();
                     }
@@ -83,7 +83,7 @@ namespace EFCore.Controllers
         }
         private bool AlunoExists(int id)
         {
-            return _context.Alunos.Any(e => e.Id == id);
+            return _context.Alunos.Any(e => e.IdAluno == id);
         }
 
         //GET
@@ -93,7 +93,7 @@ namespace EFCore.Controllers
             {
                 return NotFound();
             }
-            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id); //pegar aluno cujo ID seja igual ID q estou passando
+            var aluno = _context.Alunos.SingleOrDefault(a => a.IdAluno == id); //pegar aluno cujo ID seja igual ID q estou passando
 
             if (aluno == null)
             {
@@ -108,7 +108,7 @@ namespace EFCore.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirma(int? id)
         {
-            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id);
+            var aluno = _context.Alunos.SingleOrDefault(a => a.IdAluno == id);
             _context.Alunos.Remove(aluno);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -121,7 +121,7 @@ namespace EFCore.Controllers
                 return NotFound();
             }
 
-            var aluno = _context.Alunos.SingleOrDefault(a => a.Id == id);
+            var aluno = _context.Alunos.SingleOrDefault(a => a.IdAluno == id);
 
             if (aluno == null)
             {

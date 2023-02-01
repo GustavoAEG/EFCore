@@ -34,7 +34,7 @@ namespace EFCore.Controllers
             }
 
             var aluno = await _context.Alunos
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdAluno == id);
             if (aluno == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace EFCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sexo,Email,Nascimento")] Aluno aluno)
         {
-            if (id != aluno.Id)
+            if (id != aluno.IdAluno)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace EFCore.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlunoExists(aluno.Id))
+                    if (!AlunoExists(aluno.IdAluno))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace EFCore.Controllers
             }
 
             var aluno = await _context.Alunos
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdAluno == id);
             if (aluno == null)
             {
                 return NotFound();
@@ -155,7 +155,7 @@ namespace EFCore.Controllers
 
         private bool AlunoExists(int id)
         {
-          return _context.Alunos.Any(e => e.Id == id);
+          return _context.Alunos.Any(e => e.IdAluno == id);
         }
     }
 }
