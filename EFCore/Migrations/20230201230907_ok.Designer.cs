@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230131205507_Include")]
-    partial class Include
+    [Migration("20230201230907_ok")]
+    partial class ok
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,8 +40,8 @@ namespace EFCore.Migrations
 
                     b.Property<string>("Foto")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime>("Nascimento")
                         .HasColumnType("datetime2");
@@ -58,12 +58,47 @@ namespace EFCore.Migrations
 
                     b.Property<string>("Texto")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("TipoSociosTipoSocioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TipoSociosTipoSocioId");
+
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("EFCore.Models.TipoSocios", b =>
+                {
+                    b.Property<int>("TipoSocioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoSocioId"));
+
+                    b.Property<int>("DuracaoMeses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaxaDesconto")
+                        .HasColumnType("int");
+
+                    b.HasKey("TipoSocioId");
+
+                    b.ToTable("TipoSocioL");
+                });
+
+            modelBuilder.Entity("EFCore.Models.Aluno", b =>
+                {
+                    b.HasOne("EFCore.Models.TipoSocios", "TipoSocios")
+                        .WithMany()
+                        .HasForeignKey("TipoSociosTipoSocioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoSocios");
                 });
 #pragma warning restore 612, 618
         }

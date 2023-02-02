@@ -27,11 +27,11 @@ namespace EFCore.Migrations
 
             modelBuilder.Entity("EFCore.Models.Aluno", b =>
                 {
-                    b.Property<int>("IdAluno")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAluno"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -64,7 +64,7 @@ namespace EFCore.Migrations
                     b.Property<int>("TipoSociosTipoSocioId")
                         .HasColumnType("int");
 
-                    b.HasKey("IdAluno");
+                    b.HasKey("Id");
 
                     b.HasIndex("TipoSociosTipoSocioId");
 

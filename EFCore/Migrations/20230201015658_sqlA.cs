@@ -34,14 +34,14 @@ namespace EFCore.Migrations
                 name: "TipoSocioL",
                 columns: table => new
                 {
-                    IdAluno = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DuracaoMeses = table.Column<int>(type: "int", nullable: false),
                     TaxaDesconto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoSocioL", x => x.IdAluno);
+                    table.PrimaryKey("PK_TipoSocioL", x => x.Id);
                 });
         }
 

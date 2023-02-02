@@ -7,7 +7,7 @@ namespace EFCore.Models
     public class Aluno
     {
         [Key]
-        public int IdAluno { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(50)]
         public string Nome { get; set; }

@@ -6,7 +6,7 @@ namespace EFCore.Models
     [Table("TipoSocioL")]
     public class TipoSocios
     {
-        //EF identifica como chave primaria o termo 'IdAluno'
+        //EF identifica como chave primaria o termo 'Id'
         [Key]
         public int TipoSocioId { get; set; }
         [Required]

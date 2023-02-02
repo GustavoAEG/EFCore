@@ -11,7 +11,7 @@ namespace EFCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "IdAluno",
+                name: "Id",
                 table: "TipoSocioL",
                 newName: "TipoSocioId");
 
@@ -54,7 +54,7 @@ namespace EFCore.Migrations
             migrationBuilder.RenameColumn(
                 name: "TipoSocioId",
                 table: "TipoSocioL",
-                newName: "IdAluno");
+                newName: "Id");
         }
     }
 }

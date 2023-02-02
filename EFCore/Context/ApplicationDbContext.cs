@@ -10,7 +10,6 @@ namespace MVC_EF.Models
         {
 
         }
-
         public DbSet<TipoSocios> TipoSocioL { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
 
