@@ -1,7 +1,7 @@
 ﻿using EFCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using EFCore.Context;
-using MVC_EF.Models;
+using EFCore.Models;
 using System.Data;
 
 namespace EFCore.Controllers

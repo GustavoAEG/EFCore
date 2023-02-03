@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EFCore.Models;
-using MVC_EF.Models;
+using EFCore.Models;
 
 namespace EFCore.Controllers
 {

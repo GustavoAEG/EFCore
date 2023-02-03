@@ -1,7 +1,7 @@
 ﻿using EFCore.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MVC_EF.Models
+namespace EFCore.Models
 {
     public class ApplicationDbContext:DbContext
     {

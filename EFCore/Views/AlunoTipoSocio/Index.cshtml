@@ -1,4 +1,4 @@
-@model IEnummerable<EFCore.Models.Aluno>
+@model IEnumerable<EFCore.Models.Aluno>
 
     <h2>Informação sobre Alunos e Taxa de Desconto</h2>
 
@@ -7,10 +7,10 @@
 <p>Não existem informações</p>
 }else{
 
-    <table class="table-boardered">
+    <table class="table-bordered">
         <thead>
             <tr>Nome</tr>
-            <tr>Taxa de desconto</tr>
+            <tr>   % Taxa de desconto</tr>
             </thead>
 
             <tbody>
@@ -19,7 +19,7 @@
                 {
                 <tr>
                    <td> @Html.DisplayFor(m=> aluno.Nome)</td> 
-                    <td> @Html.DisplayFor(m=> aluno.TipoSocio.TaxaDesconto)</td>
+                    <td colspan="3"> @Html.DisplayFor(m=> aluno.TipoSocios.TaxaDesconto)</td>
                 </tr>
                 }
             </tbody>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EFCore.Models;
-using MVC_EF.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Controllers
 {
@@ -15,7 +15,7 @@ namespace EFCore.Controllers
 
         public IActionResult Index()
         {
-            var infoAluno = contexto.Alunos.ToList
+            var infoAluno = contexto.Alunos.Include(tp => tp.TipoSocios);
             return View(infoAluno);
         }
     }
